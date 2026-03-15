@@ -320,3 +320,7 @@ CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -tags "full"
 ## Stargazers over time
 
 [![Stargazers over time](https://starchart.cc/p4gefau1t/trojan-go.svg)](https://starchart.cc/p4gefau1t/trojan-go)
+
+## kenzok8 maintenance
+
+This fork is actively maintained by kenzok8 with independent release cadence.
