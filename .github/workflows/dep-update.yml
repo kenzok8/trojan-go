@@ -31,6 +31,9 @@ jobs:
           fi
           go mod tidy
 
+      - name: Verify build (catch API breakage)
+        run: go build -tags full ./...
+
       - name: Show diff
         run: git diff go.mod go.sum
 
