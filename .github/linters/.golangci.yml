@@ -1,10 +1,11 @@
 run:
   timeout: 5m
-  skip-files:
-    - \.pb\.go$
 
 issues:
-  new: true
+  exclude-rules:
+    - path: \.pb\.go$
+      linters:
+        - all
 
 linters:
   enable:
@@ -19,25 +20,9 @@ linters:
     - govet
     - ineffassign
     - misspell
-    - typecheck
     - unconvert
     - whitespace
   disable:
-    - deadcode
     - errcheck
-    - goprintffuncname
     - gosimple
     - nilerr
-    - rowserrcheck
-    - staticcheck
-    - structcheck
-    - stylecheck
-    - unparam
-    - unused
-    - varcheck
-
-linters-settings:
-  gci:
-    local-prefixes: github.com/p4gefau1t/trojan-go
-  goimports:
-    local-prefixes: github.com/p4gefau1t/trojan-go
