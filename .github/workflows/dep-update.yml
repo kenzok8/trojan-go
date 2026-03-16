@@ -29,10 +29,9 @@ jobs:
           else
             go get -u ./...
           fi
-          go mod tidy
-          # Pin go directive to 1.24 for OpenWrt SDK (Go 1.24.13 + GOTOOLCHAIN=local) compatibility
-          # go mod tidy may auto-bump the directive based on runner Go version; force it back
-          go mod edit -go=1.24
+          # Use -go=1.24 to pin the go directive for OpenWrt SDK (Go 1.24.13 + GOTOOLCHAIN=local) compatibility
+          # This sets the directive AND regenerates go.sum in one consistent step
+          go mod tidy -go=1.24
 
       - name: Verify build (catch API breakage)
         run: go build -tags full ./...
