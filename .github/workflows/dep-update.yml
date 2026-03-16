@@ -1,0 +1,43 @@
+name: dep-update
+
+on:
+  workflow_dispatch:
+    inputs:
+      packages:
+        description: 'Go packages to update (space-separated, e.g. "github.com/v2fly/v2ray-core/v4@v4.45.2"). Leave empty to run go get -u ./...'
+        required: false
+        default: ''
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Install Go
+        uses: actions/setup-go@v5
+        with:
+          go-version: '1.26'
+
+      - name: Update dependencies
+        run: |
+          if [ -n "${{ github.event.inputs.packages }}" ]; then
+            for pkg in ${{ github.event.inputs.packages }}; do
+              go get "$pkg"
+            done
+          else
+            go get -u ./...
+          fi
+          go mod tidy
+
+      - name: Show diff
+        run: git diff go.mod go.sum
+
+      - name: Commit if changed
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add go.mod go.sum
+          git diff --cached --exit-code || git commit -m "deps: update go modules via dep-update workflow"
+          git push
