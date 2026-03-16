@@ -9,12 +9,12 @@ require (
 	github.com/smartystreets/goconvey v1.6.4
 	github.com/stretchr/testify v1.7.0
 	github.com/txthinking/socks5 v0.0.0-20251011041537-5c31f201a10e
-	github.com/v2fly/v2ray-core/v4 v4.42.2
+	github.com/v2fly/v2ray-core/v4 v4.45.2
 	github.com/xtaci/smux v1.5.57
 	golang.org/x/net v0.38.0
 	golang.org/x/term v0.30.0
 	golang.org/x/time v0.0.0-20210723032227-1f47c861a9ac
-	google.golang.org/grpc v1.40.1
+	google.golang.org/grpc v1.41.0
 	google.golang.org/protobuf v1.33.0
 	gopkg.in/yaml.v3 v3.0.1
 )
