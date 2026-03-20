@@ -1,0 +1,63 @@
+name: monthly-maintenance
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '15 3 1 * *'
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  go-maintenance:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6.0.2
+        with:
+          fetch-depth: 0
+
+      - name: Setup Go
+        uses: actions/setup-go@v6.3.0
+        with:
+          go-version-file: go.mod
+
+      - name: Refresh Go modules
+        run: |
+          set -euo pipefail
+          go get -u=patch ./...
+          go mod tidy -go=1.24.0
+
+      - name: Test
+        run: go test ./...
+
+      - name: Build
+        run: go build -tags full ./...
+
+      - name: Create maintenance pull request
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -euo pipefail
+          if git diff --quiet -- go.mod go.sum; then
+            echo "No monthly dependency changes"
+            exit 0
+          fi
+          branch="chore/monthly-maintenance-$(date +%Y%m%d)"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git checkout -b "$branch"
+          git add go.mod go.sum
+          git commit -m "chore: monthly Go module refresh"
+          git push origin "$branch"
+          PR_BODY=$(printf '%s\n' \
+            '## Summary' \
+            '- refresh Go modules with patch-level updates' \
+            '- run go mod tidy, go test ./..., and go build -tags full ./...' \
+            '- monthly automated maintenance review')
+          gh pr create \
+            --base main \
+            --head "$branch" \
+            --title "chore: monthly Go module refresh" \
+            --body "$PR_BODY"
