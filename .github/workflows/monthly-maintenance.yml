@@ -26,7 +26,27 @@ jobs:
       - name: Refresh Go modules
         run: |
           set -euo pipefail
-          go get -u=patch ./...
+          modules=$(python3 - <<'PY'
+          import pathlib
+          mods=[]
+          inside=False
+          for line in pathlib.Path('go.mod').read_text().splitlines():
+              if line.strip()=='require (':
+                  inside=True
+                  continue
+              if inside and line.strip()==')':
+                  break
+              if inside and line.strip() and '//' not in line:
+                  mod=line.strip().split()[0]
+                  if mod == 'google.golang.org/grpc':
+                      continue
+                  mods.append(mod)
+          print(' '.join(mods))
+          PY
+          )
+          if [ -n "$modules" ]; then
+            go get -u=patch $modules
+          fi
           go mod tidy -go=1.24.0
 
       - name: Test
