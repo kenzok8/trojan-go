@@ -61,6 +61,7 @@ jobs:
       - name: Create maintenance pull request
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          BASE_BRANCH: ${{ github.event.repository.default_branch }}
         run: |
           set -euo pipefail
           if git diff --quiet -- go.mod go.sum; then
@@ -80,7 +81,7 @@ jobs:
             '- run go mod tidy, go test ./..., and go build -tags full ./...' \
             '- monthly automated maintenance review')
           gh pr create \
-            --base main \
+            --base "$BASE_BRANCH" \
             --head "$branch" \
             --title "chore: monthly Go module refresh" \
             --body "$PR_BODY"
