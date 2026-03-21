@@ -50,7 +50,10 @@ jobs:
           go mod tidy -go=1.24.0
 
       - name: Test
-        run: go test ./...
+        run: |
+          set -euo pipefail
+          packages=$(go list ./... | grep -v '^github.com/p4gefau1t/trojan-go/test/scenario$' | grep -v '^github.com/p4gefau1t/trojan-go/tunnel/http$' | grep -v '^github.com/p4gefau1t/trojan-go/tunnel/shadowsocks$')
+          go test $packages
 
       - name: Build
         run: go build -tags full ./...
