@@ -52,7 +52,7 @@ jobs:
       - name: Test
         run: |
           set -euo pipefail
-          packages=$(go list ./... | grep -v '^github.com/p4gefau1t/trojan-go/test/scenario$' | grep -v '^github.com/p4gefau1t/trojan-go/tunnel/http$' | grep -v '^github.com/p4gefau1t/trojan-go/tunnel/shadowsocks$')
+          packages=$(go list ./... | grep -v '^github.com/kenzok8/trojan-go/test/scenario$' | grep -v '^github.com/kenzok8/trojan-go/tunnel/http$' | grep -v '^github.com/kenzok8/trojan-go/tunnel/shadowsocks$')
           go test $packages
 
       - name: Build

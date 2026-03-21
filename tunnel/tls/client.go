@@ -11,12 +11,12 @@ import (
 
 	utls "github.com/refraction-networking/utls"
 
-	"github.com/p4gefau1t/trojan-go/common"
-	"github.com/p4gefau1t/trojan-go/config"
-	"github.com/p4gefau1t/trojan-go/log"
-	"github.com/p4gefau1t/trojan-go/tunnel"
-	"github.com/p4gefau1t/trojan-go/tunnel/tls/fingerprint"
-	"github.com/p4gefau1t/trojan-go/tunnel/transport"
+	"github.com/kenzok8/trojan-go/common"
+	"github.com/kenzok8/trojan-go/config"
+	"github.com/kenzok8/trojan-go/log"
+	"github.com/kenzok8/trojan-go/tunnel"
+	"github.com/kenzok8/trojan-go/tunnel/tls/fingerprint"
+	"github.com/kenzok8/trojan-go/tunnel/transport"
 )
 
 // Client is a tls client

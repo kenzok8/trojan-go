@@ -9,10 +9,10 @@ import (
 	"runtime"
 	"strings"
 
-	"github.com/p4gefau1t/trojan-go/common"
-	"github.com/p4gefau1t/trojan-go/constant"
-	"github.com/p4gefau1t/trojan-go/log"
-	"github.com/p4gefau1t/trojan-go/option"
+	"github.com/kenzok8/trojan-go/common"
+	"github.com/kenzok8/trojan-go/constant"
+	"github.com/kenzok8/trojan-go/log"
+	"github.com/kenzok8/trojan-go/option"
 )
 
 type Option struct {

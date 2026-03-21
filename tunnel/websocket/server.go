@@ -11,11 +11,11 @@ import (
 
 	"golang.org/x/net/websocket"
 
-	"github.com/p4gefau1t/trojan-go/common"
-	"github.com/p4gefau1t/trojan-go/config"
-	"github.com/p4gefau1t/trojan-go/log"
-	"github.com/p4gefau1t/trojan-go/redirector"
-	"github.com/p4gefau1t/trojan-go/tunnel"
+	"github.com/kenzok8/trojan-go/common"
+	"github.com/kenzok8/trojan-go/config"
+	"github.com/kenzok8/trojan-go/log"
+	"github.com/kenzok8/trojan-go/redirector"
+	"github.com/kenzok8/trojan-go/tunnel"
 )
 
 // Fake response writer

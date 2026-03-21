@@ -7,9 +7,9 @@ import (
 	"sync"
 	"testing"
 
-	"github.com/p4gefau1t/trojan-go/common"
-	"github.com/p4gefau1t/trojan-go/config"
-	"github.com/p4gefau1t/trojan-go/test/util"
+	"github.com/kenzok8/trojan-go/common"
+	"github.com/kenzok8/trojan-go/config"
+	"github.com/kenzok8/trojan-go/test/util"
 )
 
 func TestDokodemo(t *testing.T) {

@@ -13,17 +13,17 @@ import (
 
 	netproxy "golang.org/x/net/proxy"
 
-	_ "github.com/p4gefau1t/trojan-go/api"
-	_ "github.com/p4gefau1t/trojan-go/api/service"
-	"github.com/p4gefau1t/trojan-go/common"
-	_ "github.com/p4gefau1t/trojan-go/log/golog"
-	"github.com/p4gefau1t/trojan-go/proxy"
-	_ "github.com/p4gefau1t/trojan-go/proxy/client"
-	_ "github.com/p4gefau1t/trojan-go/proxy/forward"
-	_ "github.com/p4gefau1t/trojan-go/proxy/nat"
-	_ "github.com/p4gefau1t/trojan-go/proxy/server"
-	_ "github.com/p4gefau1t/trojan-go/statistic/memory"
-	"github.com/p4gefau1t/trojan-go/test/util"
+	_ "github.com/kenzok8/trojan-go/api"
+	_ "github.com/kenzok8/trojan-go/api/service"
+	"github.com/kenzok8/trojan-go/common"
+	_ "github.com/kenzok8/trojan-go/log/golog"
+	"github.com/kenzok8/trojan-go/proxy"
+	_ "github.com/kenzok8/trojan-go/proxy/client"
+	_ "github.com/kenzok8/trojan-go/proxy/forward"
+	_ "github.com/kenzok8/trojan-go/proxy/nat"
+	_ "github.com/kenzok8/trojan-go/proxy/server"
+	_ "github.com/kenzok8/trojan-go/statistic/memory"
+	"github.com/kenzok8/trojan-go/test/util"
 )
 
 // test key and cert

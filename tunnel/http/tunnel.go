@@ -3,7 +3,7 @@ package http
 import (
 	"context"
 
-	"github.com/p4gefau1t/trojan-go/tunnel"
+	"github.com/kenzok8/trojan-go/tunnel"
 )
 
 const Name = "HTTP"

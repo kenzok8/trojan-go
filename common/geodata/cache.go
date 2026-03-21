@@ -7,8 +7,8 @@ import (
 	v2router "github.com/v2fly/v2ray-core/v4/app/router"
 	"google.golang.org/protobuf/proto"
 
-	"github.com/p4gefau1t/trojan-go/common"
-	"github.com/p4gefau1t/trojan-go/log"
+	"github.com/kenzok8/trojan-go/common"
+	"github.com/kenzok8/trojan-go/log"
 )
 
 type geoipCache map[string]*v2router.GeoIP

@@ -17,14 +17,14 @@ import (
 	"sync/atomic"
 	"time"
 
-	"github.com/p4gefau1t/trojan-go/common"
-	"github.com/p4gefau1t/trojan-go/config"
-	"github.com/p4gefau1t/trojan-go/log"
-	"github.com/p4gefau1t/trojan-go/redirector"
-	"github.com/p4gefau1t/trojan-go/tunnel"
-	"github.com/p4gefau1t/trojan-go/tunnel/tls/fingerprint"
-	"github.com/p4gefau1t/trojan-go/tunnel/transport"
-	"github.com/p4gefau1t/trojan-go/tunnel/websocket"
+	"github.com/kenzok8/trojan-go/common"
+	"github.com/kenzok8/trojan-go/config"
+	"github.com/kenzok8/trojan-go/log"
+	"github.com/kenzok8/trojan-go/redirector"
+	"github.com/kenzok8/trojan-go/tunnel"
+	"github.com/kenzok8/trojan-go/tunnel/tls/fingerprint"
+	"github.com/kenzok8/trojan-go/tunnel/transport"
+	"github.com/kenzok8/trojan-go/tunnel/websocket"
 )
 
 // Server is a tls server
