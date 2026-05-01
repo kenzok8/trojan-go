@@ -1,6 +1,6 @@
 module github.com/kenzok8/trojan-go
 
-go 1.25
+go 1.24.0
 
 require (
 	github.com/go-sql-driver/mysql v1.9.3
@@ -20,7 +20,7 @@ require (
 )
 
 require (
-	filippo.io/edwards25519 v1.1.0 // indirect
+	filippo.io/edwards25519 v1.1.1 // indirect
 	github.com/andybalholm/brotli v1.0.6 // indirect
 	github.com/cloudflare/circl v1.5.0 // indirect
 	github.com/davecgh/go-spew v1.1.1 // indirect
