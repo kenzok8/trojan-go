@@ -7,6 +7,7 @@ import (
 	"time"
 
 	"google.golang.org/grpc"
+	"google.golang.org/grpc/credentials/insecure"
 
 	"github.com/kenzok8/trojan-go/common"
 	"github.com/kenzok8/trojan-go/config"
@@ -39,7 +40,7 @@ func TestClientAPI(t *testing.T) {
 	}
 	user.AddTraffic(1234, 5678)
 	time.Sleep(time.Second)
-	conn, err := grpc.Dial(fmt.Sprintf("127.0.0.1:%d", port), grpc.WithInsecure())
+	conn, err := grpc.NewClient(fmt.Sprintf("127.0.0.1:%d", port), grpc.WithTransportCredentials(insecure.NewCredentials()))
 	common.Must(err)
 	client := NewTrojanClientServiceClient(conn)
 	resp, err := client.GetTraffic(ctx, &GetTrafficRequest{User: &User{

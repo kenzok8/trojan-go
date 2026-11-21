@@ -76,7 +76,6 @@ func TestSocks(t *testing.T) {
 	s, _ := socks5.NewClassicServer(socksAddr.String(), "127.0.0.1", "", "", 0, 0)
 
 	go s.ListenAndServe(&socks5.DefaultHandle{})
-	
 
 	time.Sleep(time.Second * 2)
 	conn, err := client.DialConn(target, nil)

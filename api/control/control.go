@@ -8,6 +8,7 @@ import (
 	"io"
 
 	"google.golang.org/grpc"
+	"google.golang.org/grpc/credentials/insecure"
 
 	"github.com/kenzok8/trojan-go/api/service"
 	"github.com/kenzok8/trojan-go/common"
@@ -137,7 +138,7 @@ func (o *apiController) Handle() error {
 	if *o.cmd == "" {
 		return common.NewError("")
 	}
-	conn, err := grpc.Dial(*o.address, grpc.WithInsecure())
+	conn, err := grpc.NewClient(*o.address, grpc.WithTransportCredentials(insecure.NewCredentials()))
 	if err != nil {
 		log.Error(err)
 		return nil
