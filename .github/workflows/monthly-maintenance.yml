@@ -14,12 +14,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v6.0.2
+        uses: actions/checkout@v7
         with:
           fetch-depth: 0
 
       - name: Setup Go
-        uses: actions/setup-go@v6.3.0
+        uses: actions/setup-go@v7
         with:
           go-version-file: go.mod
 
@@ -38,8 +38,6 @@ jobs:
                   break
               if inside and line.strip() and '//' not in line:
                   mod=line.strip().split()[0]
-                  if mod == 'google.golang.org/grpc':
-                      continue
                   mods.append(mod)
           print(' '.join(mods))
           PY
@@ -47,7 +45,7 @@ jobs:
           if [ -n "$modules" ]; then
             go get -u=patch $modules
           fi
-          go mod tidy -go=1.24.0
+          go mod tidy -go=1.27.0
 
       - name: Test
         run: |
@@ -85,3 +83,27 @@ jobs:
             --head "$branch" \
             --title "chore: monthly Go module refresh" \
             --body "$PR_BODY"
+
+      - name: Close superseded maintenance PRs
+        env:
+          GH_TOKEN: ${{ github.token }}
+          BASE_BRANCH: ${{ github.event.repository.default_branch }}
+        run: |
+          set -euo pipefail
+          BRANCH="chore/monthly-maintenance-${{ github.run_id }}"
+          # Only clean up when this run actually created a PR; otherwise
+          # there is no newer refresh to supersede the older ones.
+          if ! gh pr list --base "$BASE_BRANCH" --head "$BRANCH" --state open --json url --jq -e '.[0].url' >/dev/null; then
+            echo "No PR created by this run; keeping older maintenance PRs"
+            exit 0
+          fi
+          # Each run branches from current master and bumps to the latest deps,
+          # so any older open monthly-maintenance PR is superseded by this one.
+          gh pr list --base "$BASE_BRANCH" --state open --limit 50 --json number,headRefName \
+            --jq -r '.[] | select(.headRefName | startswith("chore/monthly-maintenance-")) | select(.headRefName != env.BRANCH) | "\(.number) \(.headRefName)"' |
+          while read -r num head; do
+            [ -n "$num" ] || continue
+            gh pr close "$num" --comment "Superseded by the latest monthly maintenance run ($BRANCH)." || true
+            git push origin --delete "$head" || true
+            echo "closed superseded PR #$num and deleted $head"
+          done

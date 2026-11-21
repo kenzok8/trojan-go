@@ -13,12 +13,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
 
       - name: Install Go
-        uses: actions/setup-go@v5
+        uses: actions/setup-go@v7
         with:
-          go-version: '1.26'
+          go-version: '1.27'
 
       - name: Update dependencies
         run: |
@@ -29,9 +29,9 @@ jobs:
           else
             go get -u ./...
           fi
-          # Use -go=1.24 to pin the go directive for OpenWrt SDK (Go 1.24.13 + GOTOOLCHAIN=local) compatibility
+          # Use -go=1.27 to pin the go directive for the Go 1.27 toolchain (litte gate + OpenWrt SDK golang 1.27 feed)
           # This sets the directive AND regenerates go.sum in one consistent step
-          go mod tidy -go=1.24.0
+          go mod tidy -go=1.27.0
 
       - name: Verify build (catch API breakage)
         run: go build -tags full ./...
